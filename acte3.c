@@ -221,6 +221,9 @@ int main(int argc, char** argv) {
 	liberer_liste(&seq);
 
 	// Verifier l'arbre
+	FILE *f_dot = fopen("arbre.dot", "w");
+	afficher_dot(a, f_dot);
+	fclose(f_dot);
 	if (test_nb_esp_caracs(a, nom_fichier, nb_especes, nb_carac) != 0) { 
 		fprintf(stderr, "\033[0;31mERREUR\033[0m sur %s\n",
 				fichier_test);
