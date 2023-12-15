@@ -8,25 +8,25 @@
 
 void analyse_arbre (arbre racine, int* nb_esp, int* nb_carac)
 {
-   *nb_esp = 0;
-   *nb_carac = 0;
-   if(racine == NULL) return;
-   if(!racine->droit && !racine->gauche)
-   {
-      (*nb_esp)++;
-   }
-   else
-   {
-      (*nb_carac)++;
-      int nb_esp_g, nb_carac_g;
-      int nb_esp_d, nb_carac_d;
-      analyse_arbre(racine->gauche, &nb_esp_g, &nb_carac_g);
-      analyse_arbre(racine->droit, &nb_esp_d, &nb_carac_d);
-      *nb_carac += nb_carac_g + nb_carac_d;
-      *nb_esp += nb_esp_g + nb_esp_d;
-   }
-}
+    if (racine == NULL){
+        *nb_carac = 0;
+        *nb_esp = 0;
+        return;
+    }
+    int espg, caracg;
+    int espd, caracd;
+    analyse_arbre(racine->droit, &espd, &caracd);
+    analyse_arbre(racine->gauche, &espg, &caracg);
 
+    if (racine->droit == NULL && racine->gauche == NULL) {
+        *nb_esp = 1 + espd + espg;
+        *nb_carac = caracd + caracg;
+    }
+    else {
+        *nb_carac = 1 + caracd + caracg;
+        *nb_esp = espd + espg;
+    }
+}
 
 
 
