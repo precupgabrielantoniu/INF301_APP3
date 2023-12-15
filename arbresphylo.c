@@ -38,27 +38,24 @@ void analyse_arbre (arbre racine, int* nb_esp, int* nb_carac)
  */
 int rechercher_espece (arbre racine, char *espece, liste_t* seq)
 {
-    if(racine == NULL) return 1;
-    if(!strcmp(racine->valeur, espece)) return 0;
-    int retrouvee = 1;
-    if(racine->gauche)
+    if (racine == NULL)
+        return 1;
+    if (racine->gauche == NULL && racine->droit == NULL)
     {
-      retrouvee = rechercher_espece(racine->gauche, espece, seq);
-      if(retrouvee == 0)
-      {
-         return retrouvee;
-      }
+        if (strcmp(racine->valeur, espece) == 0)
+            return 0;
+        else
+            return 1;
     }
-    if(racine->droit)
+    
+    if(rechercher_espece(racine->droit, espece, seq) == 0)
     {
-      retrouvee = rechercher_espece(racine->droit, espece, seq);
-      if(retrouvee == 0)
-      {
-         ajouter_tete(seq, racine->valeur);
-         return retrouvee;
-      }
+        ajouter_tete(seq, racine->valeur);
+        return 0;
     }
-    printf("L'espece %s n'as pas ete retrouvee.\n", espece);
+    else if (rechercher_espece(racine->gauche, espece, seq) == 0)
+        return 0;
+
     return 1;
 }
 
