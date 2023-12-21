@@ -36,7 +36,14 @@ void afficher_dot(arbre racine, FILE* f_dot);
 // cas-là, ajout_espece fait l'affaire). Ceci permet d'éviter d'avoir à ajouter
 // des noeuds caractéristique sans enfant qui seraient confondues avec des
 // espèces/feuilles.
-int ajouter_carac(arbre* a, char* carac, cellule_t* seq);
 
+int path_to_noeud(arbre racine, char *espece, liste_t *seq);
+
+int suivre_path(arbre ar, liste_t *path, arbre *res);
+
+int parent_commun(arbre ar, arbre *res, string esp1, string esp2);
+
+int ajouter_carac(arbre *a, char *carac, cellule_t *seq);
 
 #endif
+
